@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UsersController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Les Utilisateurs</h1>
+        </div>
+        <div class="container">
+            {% for user in users %}
+
+                    <div class="card">
+                        <div class="card-body">
+                            <ul>{{ user.nom }} {{ user.prenom }}<br> {{ user.email }}
+                                <br>{{ user.dateInsc | date('d/m/Y H:i:s') }}</ul>
+                            <a href="{{path('updateUser', {id: user.id})}}"><button class="btn btn-warning">Modifier</button></a>
+                        </div>
+                    </div>
+            {% endfor %}
+        </div>
+
+        <div class="container mt-5">
+            {{ form_start(userForm) }}
+            <select name="taskId" id="">
+                {% for task in tasks %}
+                    <option value="{{ task.id }}">Tâche à assigner : {{ task.name }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
+            Quel utilisateur va réaliser cette tâche ?
+            {{ form_end(userForm) }}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TasksController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Les Tâches</h1>
+    </div>
+    <div class="container">
+        {% for task in tasks %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ task.name }}</h5>
+
+                  <a href="{{path('updateTask', {id: task.id})}}"><button class="btn btn-warning">Modifier</button></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container mt-5">
+        {{ form_start(taskForm) }}
+        <select name="userId" id="">
+            {% for user in users %}
+                <option value="{{ user.id }}">Assigner quelqu'un à cette tâche : {{ user.nom }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        Quelle est cette tâche ?{{ form_end(taskForm) }}
+    </div>
+</div>
+    {% endblock %}
+
